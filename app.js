@@ -15,8 +15,4 @@ if(process.env.ENV === "DEVELOPMENT"){
     app.use(errorHandlers.productionErrors)
 }
 
-
-
-  
-
 module.exports = app;
