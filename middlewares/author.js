@@ -9,7 +9,8 @@ module.exports = async (req, res, next) => {
     req.payload = payload;
     next();
 
-    }catch(err){
+    }
+    catch(err){
         res.status(401).json({
             message: "Interdit!!!",
         })

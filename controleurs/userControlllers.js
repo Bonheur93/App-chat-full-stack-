@@ -40,10 +40,11 @@ exports.login = async (req, res) => {
 
     if (!user) throw "Email et le mot de pass ne sont pas correct";
     
-    const token = jwt.sign({id: user.id}, process.env.SECRET);
+    const token = await jwt.sign({id: user.id}, process.env.SECRET);
 
     res.json({
         message: "Utilistateur est logé avec succès",
+        token,
     });
 };
 
