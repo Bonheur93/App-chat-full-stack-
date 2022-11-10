@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {catchErrors} = require("../handlers/errorHandlers");
 const chatroomController = require("../controleurs/chatroomController");
 
-const author = require(".../middleware/author");
+const author = require("../middlewares/author");
 
 router.post("/", author, catchErrors(chatroomController.createChatroom));
 

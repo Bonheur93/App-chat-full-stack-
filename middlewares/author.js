@@ -1,4 +1,4 @@
-const jwt = require("jwt-then")
+const jwt = require("jwt-then");
 
 module.exports = async (req, res, next) => {
     try{
@@ -14,5 +14,5 @@ module.exports = async (req, res, next) => {
             message: "Interdit!!!",
         })
 
-    }
+    };
 };
