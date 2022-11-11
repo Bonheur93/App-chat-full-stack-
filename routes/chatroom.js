@@ -4,7 +4,7 @@ const chatroomController = require("../controleurs/chatroomController");
 
 const author = require("../middlewares/author");
 
-router.post("/", author, catchErrors(chatroomController.createChatroom));
+router.post("/", author, catchErrors(chatroomController.createchatroom));
 
   
 

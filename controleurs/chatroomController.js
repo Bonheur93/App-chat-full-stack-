@@ -1,20 +1,20 @@
 const mongoose = require ("mongoose");
-const chatroom = require('../modeles/Chatroom');
+const Chatroom = require('../modeles/Chatroom');
 
 
-exports.createchatroom = async (res, req)=>{
+exports.createchatroom = async (req, res)=>{
     const {name} = req.body;
 
-    const nameRegex = /^[A-Za-z\s]+$/;
+    // const nameRegex = /^[A-Za-z\s]+$/;
     
-    if(!nameRegex.test(name)) throw "Le nom ne peut que contenir les alphabets.";
+    // if(!nameRegex.test(name)) throw "Le nom ne peut que contenir les alphabets.";
 
-    const chatroomExists = await chatroom.findOne({ name });
-
+    const chatroomExists = await Chatroom.findOne({ name });
+    console.log(chatroomExists);
 
     if(chatroomExists) throw "Chatroom existe déjà avec ce nom";
 
-    const chatroom = new chatroom ({
+    const chatroom = new Chatroom ({
         name,
     });
     await chatroom.save();
