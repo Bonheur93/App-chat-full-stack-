@@ -2,7 +2,7 @@ const jwt = require("jwt-then");
 
 module.exports = async (req, res, next) => {
     try{
-        // if(!req.headers.authorization) throw "interdit!";
+       if(!req.headers.authorization) throw "interdit!";
         const token = req.headers.authorization.split(" ")[1];
 
 

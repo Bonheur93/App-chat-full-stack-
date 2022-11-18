@@ -4,29 +4,37 @@ const sha256 = require("js-sha256");
 const jwt = require('jwt-then');
 
 exports.register = async (req, res) => {
+    console.log(req.body)
     const { name, email, password } = req.body;
     const emailRejex = /@gmail.com|@yahoo.com|@hotmail.com|@live.com/;
+    try {
+        if (!emailRejex.test(email)) throw "Email nest pas supporté depuis votre domain.";
+        if (password.length < 6) throw "Le mot de pass doit avoir contenir 6 caractères.";
 
-    if (!emailRejex.test(email)) throw "Email nest pas supporté depuis votre domain.";
-    if (password.length < 6) throw "Le mot de pass doit avoir contenir 6 caractères.";
+        const userExists = await User.findOne({
+            email,   
+        }); 
 
-    const userExists = await User.findOne({
-        email,   
-    }); 
+        if (userExists) throw "Email de ce même nom existe déjà";
 
-    if (userExists) throw "Email de ce même nom existe déjà";
+        const user = new User({
+            name,
+            email,
+            password: sha256(password + process.env.SALT),
+        });
 
-    const user = new User({
-        name,
-        email,
-        password: sha256(password + process.env.SALT),
-    });
+        await user.save();
 
-    await user.save();
-
-    res.json({
-        message: "l'utilisateur [" + name + "] est enregistré avec succès",
-    });
+        res.status(201).json({
+            message: "l'utilisateur [" + name + "] est enregistré avec succès",
+        
+        });
+    } catch (error) {
+        res.json({
+            error
+        });
+    }
+    
 
 };
 
@@ -47,5 +55,9 @@ exports.login = async (req, res) => {
         token,
     });
 };
+
+// exports.message = async(req, res)=>{
+
+// }
 
 
