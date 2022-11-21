@@ -29,7 +29,7 @@ exports.createchatroom = async (req, res)=>{
     });
 };
 
-//aff all chatroom
+
 exports.getAllChatrooms = async(req, res)=> {
     const chatroom = await chatroom.find([]);
     

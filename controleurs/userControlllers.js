@@ -56,8 +56,5 @@ exports.login = async (req, res) => {
     });
 };
 
-// exports.message = async(req, res)=>{
-
-// }
 
 
