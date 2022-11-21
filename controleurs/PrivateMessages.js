@@ -1,5 +1,6 @@
 
-const Message = require('../Models/Message');
+const Message = require('../modeles/Message');
+
 
 exports.PostMessage = (req, res, next)=>{
     delete req.body._id;

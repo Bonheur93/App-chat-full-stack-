@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {catchErrors} = require("../handlers/errorHandlers");
 const chatroomController = require("../controleurs/chatroomController");
-const PrivateMessages = require('../controlleurs/PrivateMessages')
+const PrivateMessages = require("../controleurs/PrivateMessages")
 
 const author = require("../middlewares/author");
 const { route } = require("../app");
