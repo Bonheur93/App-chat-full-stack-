@@ -31,10 +31,15 @@ exports.createchatroom = async (req, res)=>{
 
 
 exports.getAllChatrooms = async(req, res)=> {
-    const chatroom = await chatroom.find([]);
-    
-    res.json(chatroom);
-
+    try {
+        const chatrooms = await Chatroom.find({});
+        console.log(chatrooms);
+        res.json(chatrooms);
+    } catch (error) {
+        console.log(error)
+    }
+    // const chatrooms = await Chatroom.find({});
+    // res.json(chatrooms);
 };
 
 
