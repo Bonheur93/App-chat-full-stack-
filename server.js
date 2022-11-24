@@ -37,20 +37,27 @@ const jwt = require("jwt-then");
 io.use(async (socket, next) => {
     const token = socket.handshake.query.token;
 
+    // try {
+    //     const payload = await jwt.verify(token, process.env.SECRET);
+    //     socket.userId = payload.id;
+    //     next();
+
+    // }
+    // catch (err) {}
     try {
         const token = socket.handshake.query.token;
         const payload = await jwt.verify(token, process.env.SECRET);
+
         socket.userId = payload.id;
         next();
 
-    }
-    catch (err) {}
+    } catch (err) {};
 });
 
-io.on('connection', (socket)=>{
+io.on('connection', (socket)=> {
     console.log("Connecté: " + socket.userId);
 
-    socket.on('deconnecté', ()=>{
+    socket.on('deconnecté', ()=> {
         console.log("deconnecté: " + socket.userId);   
-    })
-})
+    });
+});
