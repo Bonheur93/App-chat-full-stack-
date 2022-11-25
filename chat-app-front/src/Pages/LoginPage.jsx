@@ -1,17 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom"
 import makeToast from '../Toaster';
 
 
 
 const LoginPage = (props) => {
+  const navigate = useNavigate();
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
 
   const loginUser = (props) => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
 
     axios
       .post("http://localhost:8000/user/login", {
@@ -20,25 +21,28 @@ const LoginPage = (props) => {
       })
       .then((response) => {
         makeToast("success", response.data.message);
+        navigate("/dashboard")
         localStorage.setItem("CC_Token", response.data.token);
         console.log(response.data);
-        props.history.push("/dashboard");
+
         props.setupSocket();
-         
+
       })
-        .catch ((err) => {
+      .catch((err) => {
         // console.log("erreur de la reponse");
-         if(
+        if (
           err &&
           err.response &&
           err.response.data &&
           err.response.data.message
-         );
+        );
       });
-};
+  };
 
+  // const handleClick = () => {
+  //   navigate("/dashboard")
+  // };
 
-   
   return (
     <div className='card'>
       <div className='cardHeader'>Login</div>
@@ -49,7 +53,7 @@ const LoginPage = (props) => {
         </div>
         <div className='inputGroup'>
           <label htmlFor='password'>Password</label>
-          <input type="password" name="password" id="password" placeholder='Votre mot de pass' ref={passwordRef}/>
+          <input type="password" name="password" id="password" placeholder='Votre mot de pass' ref={passwordRef} />
         </div>
         <button onClick={loginUser}>Login</button>
 
