@@ -9,6 +9,22 @@ const ChatroomPage = ({ match, socket }) => {
   //     token: localStorage.getItem("CC_Token"),
   //   },
   // });
+  React.useEffect(() =>{
+    socket.emit("joinRoom", {
+      chatroomId, 
+    });
+
+    socket.on("newMessage", ({message, userId})=>{
+      setMessages(...messages, message);
+    });
+
+    return () =>{
+      socket.emit("LeaveRoom", {
+        chatroomId,
+      });
+    };
+
+  }, []);
 
 
   return <div className="chatroomPage">
