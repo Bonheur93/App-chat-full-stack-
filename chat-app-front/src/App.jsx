@@ -14,32 +14,28 @@ import makeToast from "./Toaster";
 function App() {
   const [socket, setSocket] = React.useState(null);
 
-  const setupSocket = () => {
+  React.useEffect(() => {
     const token = localStorage.getItem("CC_Token");
-    if (token.length && !socket) {
-      const newSocket = io("http://localhost:8000", {
+   
+      const newSocket = io("http://localhost:8001", {
         query: {
           token: localStorage.getItem("CC_Token"),
         },
       });
 
-      newSocket.on("deconnecté", () => {
+      console.log(newSocket)
+
+      newSocket.on("disconnect", () => {
         setSocket(null);
         setTimeout(setupSocket, 3000);
         makeToast("error", "socket est deconnecté!");
       });
 
-      newSocket.on("Connecté", () => {
+      newSocket.on("connect", () => {
         makeToast("succes!", "socket est connecté!");
       });
       setSocket(newSocket);
-    }
-
-  };
-
-  React.useEffect(() => {
-    setSocket();
-
+    
   }, []);
 
 
@@ -50,7 +46,7 @@ function App() {
       <Route path="/login" element= {<LoginPage />} exact />
       <Route path="/register" element={<RegisterPage />} exact />
       <Route path="/dashboard" element= {<DashboardPage />} exact />
-      <Route path="/chatroom/:id" element = {<ChatroomPage />}  exact />
+      <Route path="/chatroom/:id" element = {<ChatroomPage socket={socket} />}  exact />
     </Routes>
   );
 };
