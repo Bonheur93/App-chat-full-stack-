@@ -7,7 +7,7 @@ const IndexPage = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   React.useEffect(() => {
     const token = localStorage.getItem("CC_Token");
-    console.log(token);
+    //console.log(token);
     if (!token) {
       setIsAuth(true);
       navigate("/login");

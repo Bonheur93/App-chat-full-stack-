@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import makeToast from '../Toaster';
 
 
@@ -15,7 +15,7 @@ const LoginPage = (props) => {
     const password = passwordRef.current.value;
 
     axios
-      .post("http://localhost:8000/user/login", {
+      .post("http://localhost:8001/user/login", {
         email,
         password,
       })
@@ -29,7 +29,7 @@ const LoginPage = (props) => {
 
       })
       .catch((err) => {
-        // console.log("erreur de la reponse");
+        console.log("erreur de la reponse");
         if (
           err &&
           err.response &&

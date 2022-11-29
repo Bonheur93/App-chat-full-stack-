@@ -33,7 +33,7 @@ exports.createchatroom = async (req, res)=>{
 exports.getAllChatrooms = async(req, res)=> {
     try {
         const chatrooms = await Chatroom.find({});
-        console.log(chatrooms);
+        //console.log(chatrooms);
         res.json(chatrooms);
     } catch (error) {
         console.log(error)
