@@ -17,8 +17,8 @@ const ChatroomPage = ({ socket }) => {
 
 
   const sendMessage = () => {
-    console.log('socket')
-    console.log(socket)
+    // console.log('socket')
+    // console.log(socket)
     if (socket) {
       socket.emit("chatroomMessage", {
         chatroomId,
@@ -40,11 +40,12 @@ console.log(socket)
 
     
       socket.on("newMessage", (message) => {
-        const newMessages = [...messages, message];
-        setMessages(newMessages)
+        // const newMessages = [...messages, message];
+        // setMessages(newMessages)
+        setMessages([...messages, message]);
       });
   
-  }, [messages]);
+  },);
 
 
   React.useEffect(() => {
